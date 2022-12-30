@@ -7,6 +7,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { AppContext } from '../context';
 import axios from 'axios';
 import constants from '../constants'
+import './style.css'
 export default function SimpleAccordion() {
     const { dispatchUserEvent, data } = React.useContext(AppContext);
     const [apiData, setApiData] = React.useState({})
@@ -31,6 +32,7 @@ export default function SimpleAccordion() {
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
+                    
                 >
                     <Typography>{names[index]}</Typography>
                 </AccordionSummary>

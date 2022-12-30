@@ -78,11 +78,11 @@ export default function CustomizedAccordions() {
     <div>
       {Object.keys(data).length > 0 && 
          <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-           <Typography>{data}</Typography>
+         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header" style={{fontSize: '16px'}}>
+           <Typography>{data.charAt(0).toUpperCase() + data.slice(1)}</Typography>
          </AccordionSummary>
          {Object.keys(data).length > 0 && typeData &&  typeData.length > 0 && typeData.map((item, index) => 
-             <AccordionDetails>
+             <AccordionDetails style={{backgroundColor: 'midnightblue', color: 'white'}}>
                 <Typography onClick={() => dispatchUserEvent('LEVEL_1', item)}>
                   {item}
                 </Typography>
