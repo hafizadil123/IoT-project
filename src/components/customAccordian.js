@@ -9,7 +9,7 @@ import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import { AppContext } from '../context';
 import axios from 'axios';
-
+import constants from '../constants'
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
@@ -46,41 +46,49 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   borderTop: '1px solid rgba(0, 0, 0, .125)',
 }));
 
+const formatUrl = (type, value) => {
+  if(type === 'states') {
+    return `${constants.apiURL}/get-states`
+  } else if(type === 'cities') {
+    return `${constants.apiURL}/get-cities`
+  } else if(type === 'branches') {
+    return `${constants.apiURL}/get-branches`
+  }
+}
 export default function CustomizedAccordions() {
   const [expanded, setExpanded] = React.useState('panel1');
   const [typeData, setTypeData] = React.useState([]);
   
-  React.useEffect(() => {
-    axios.get(`http://localhost:5000?type=${data}`).then((res) => {
-    setTypeData(res.data);
-    })
-  })
+  
   const { data } = React.useContext(AppContext);
+  console.log('dtaaa', data);
+  React.useEffect(() => {
+    axios.get(`${formatUrl(data)}`).then((res) => {
+    setTypeData(res.data.result);
+    })
+  }, [data])
+
   console.log('acccc', data);
   const handleChange =
     (panel) => (event, newExpanded) => {
       setExpanded(newExpanded ? panel : false);
     };
 
-
-  const dataV = [{
-    name: 'Maharashta',
-    cities: []
-  }]
   return (
     <div>
-      {Object.keys(data).length > 0 && dataV &&  dataV.length > 0 && dataV.map(item => 
+      {Object.keys(data).length > 0 && 
          <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
          <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
            <Typography>{data}</Typography>
          </AccordionSummary>
-         <AccordionDetails>
+         {Object.keys(data).length > 0 && typeData &&  typeData.length > 0 && typeData.map((item, index) => 
+             <AccordionDetails>
                 <Typography onClick={() => dispatchUserEvent('LEVEL_1', item)}>
-                  {item.name}{'   '} {item.cities.length}
+                  {item}
                 </Typography>
                 </AccordionDetails>
-       </Accordion>)
-    
+)}
+       </Accordion>
 }
     </div>
        
