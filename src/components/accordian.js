@@ -9,9 +9,16 @@ import axios from 'axios';
 import constants from '../constants'
 import './style.css'
 export default function SimpleAccordion() {
-    const { dispatchUserEvent, data } = React.useContext(AppContext);
+    const { dispatchUserEvent, data, branchInfo } = React.useContext(AppContext);
+    const [expanded, setExpanded] = React.useState('panel1');
     const [apiData, setApiData] = React.useState({})
     const names = ['States & UTs', 'Cities', 'Branches'];
+
+    const handleChange =
+    (panel) => (event, newExpanded) => {
+      setExpanded(newExpanded ? panel : false);
+    };
+
     React.useEffect(() => {
         axios.get(`${constants.apiURL}/get-stats`).then((res) =>{
             setApiData(res.data);
@@ -32,6 +39,7 @@ export default function SimpleAccordion() {
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
+                    // expanded={expanded === `panel1`} onChange={handleChange(`panel1`)}
                     
                 >
                     <Typography>{names[index]}</Typography>

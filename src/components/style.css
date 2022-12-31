@@ -4,3 +4,34 @@
     font-weight: bold;
     font-size: 40px;
 }
+
+
+.box_style {
+    border: 1px solid;
+    padding: 16px;
+    font-size: 20px;
+    font-weight: bold;
+    background: white;
+    color: black;
+    border-radius: 20px;
+}
+
+.box_style_main {
+    border: 1px solid;
+    padding: 16px;
+    font-size: 20px;
+    font-weight: bold;
+    background: white;
+    color: black;
+    border-radius: 15px;
+    margin-top: 15px;
+}
+.css-ahj2mt-MuiTypography-root {
+    margin: 0;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5;
+    letter-spacing: 0.00938em;
+    margin-top: 15px !important;
+}
