@@ -89,7 +89,7 @@ export default function CustomizedAccordions() {
           </AccordionSummary>
           {!branchInfo && Object.keys(data).length > 0 && typeData && typeData.length > 0 && typeData.map((item, index) =>
             <AccordionDetails style={{ backgroundColor: 'midnightblue', color: 'white' }}>
-              <Typography onClick={() => saveInfo(item)}>
+              <Typography onClick={() => saveInfo(item)} className='box_style'>
                 {item}
               </Typography>
             </AccordionDetails>
