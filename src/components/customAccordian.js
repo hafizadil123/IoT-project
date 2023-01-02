@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import { AppContext } from '../context';
 import axios from 'axios';
 import constants from '../constants'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
@@ -64,7 +65,7 @@ export default function CustomizedAccordions() {
   const [typeData, setTypeData] = React.useState([]);
 
 
-  const { data, dispatchUserEvent, branchInfo } = React.useContext(AppContext);
+  const { data, dispatchUserEvent, branchInfo, filter } = React.useContext(AppContext);
   console.log('dtaaa', data);
   React.useEffect(() => {
     axios.get(`${formatUrl(data, branchInfo)}`).then((res) => {
@@ -80,22 +81,27 @@ export default function CustomizedAccordions() {
       localStorage.setItem('level', 'branchInfo')
       dispatchUserEvent('LEVEL_2', item)
     }
+
   return (
     <div>
       {Object.keys(data).length > 0 &&
-        <Accordion expanded={expanded === `panel1`} onChange={handleChange('panel1')}>
-          <AccordionSummary aria-controls="panel1d-content" id="panel1d-header" style={{ fontSize: '16px' }}>
+        <Accordion onChange={handleChange('panel1')}>
+          <AccordionSummary
+           expandIcon={!branchInfo ? <ArrowForwardIosIcon />: null}
+          aria-controls="panel1d-content" 
+          id="panel1d-header" 
+          style={{ fontSize: '16px' }}>
             <Typography>{data?.charAt(0)?.toUpperCase() + data?.slice(1)}</Typography>
           </AccordionSummary>
           {!branchInfo && Object.keys(data).length > 0 && typeData && typeData.length > 0 && typeData.map((item, index) =>
-            <AccordionDetails style={{ backgroundColor: 'midnightblue', color: 'white' }}>
+            <AccordionDetails style={{ backgroundColor: 'white' }}>
               <Typography onClick={() => saveInfo(item)} className='box_style'>
                 {item}
               </Typography>
             </AccordionDetails>
           )}
         </Accordion>
-      }
+     }
 
     </div>
 

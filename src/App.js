@@ -11,6 +11,8 @@ import { AppContext } from './context';
 export default function App() {
   const [data, setData] = React.useState({})
   const [branchInfo, setBranchInfo] = React.useState(false);
+  const [filter, setFilter] = React.useState('');
+  const [search, setSearch] = React.useState('');
   const dispatchUserEvent = (actionType, payload) => {
 		switch (actionType) {
 			case 'LEVEL_1':
@@ -21,6 +23,10 @@ export default function App() {
 				setData(payload);
         setBranchInfo(true)
 				return;
+      case 'Filter':
+        setFilter(payload)
+      case 'Search':
+        setSearch(payload)
 			default:
 				return;
 		}
@@ -29,11 +35,10 @@ export default function App() {
   console.log('dataaaa', data)
   return (
 
-    <AppContext.Provider value={{ data, dispatchUserEvent, branchInfo }}>
+    <AppContext.Provider value={{ data, dispatchUserEvent, branchInfo, filter, search }}>
     <Container maxWidth="sm">
       <Box sx={{ my: 4 }}>
         <Header />
-
         <Accordion />
         <CustomizedAccordions />
         <BranchInfoAccordian />

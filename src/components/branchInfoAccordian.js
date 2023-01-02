@@ -3,14 +3,15 @@ import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 import { AppContext } from '../context';
 import axios from 'axios';
 import constants from '../constants'
+import ExpandMoreIcon from '@mui/icons-material/ArrowForwardIos';
 
 export default function ControlledAccordions() {
     const [expanded, setExpanded] = React.useState(false);
-    const { branchInfo, data } = React.useContext(AppContext)
+    const { branchInfo, data, filter, search } = React.useContext(AppContext)
     const [typeData, setTypeData] = React.useState([]);
     const handleChange =
         (panel) => (event, isExpanded) => {
@@ -47,7 +48,7 @@ export default function ControlledAccordions() {
                                 Ambient
                             </Typography>
                         </AccordionSummary>
-                        <AccordionDetails style={{ backgroundColor: 'midnightblue', color: 'white' }}>
+                        <AccordionDetails style={{ backgroundColor: 'white'}}>
                             <div className='box_style_main'>
                                 <Typography>
                                     Temperature (Inside/outside)
@@ -93,25 +94,25 @@ export default function ControlledAccordions() {
                                 Electricity
                             </Typography>
                         </AccordionSummary>
-                        <AccordionDetails style={{ backgroundColor: 'midnightblue', color: 'white' }}>
+                        <AccordionDetails style={{ backgroundColor: 'white', color: 'white' }}>
                             <Typography className='box_style'>
-                                Live Energy (Inside/outside)  {'  '} 89
+                                Live Energy (Inside/outside)  {'  '} <span>89</span>
                             </Typography>
 
                             <Typography className='box_style'>
-                                Live Current (Inside/outside)  {'  '} 89
+                                Live Current (Inside/outside)  {'  '} <span>89</span>
                             </Typography>
 
                             <Typography className='box_style'>
-                                Live Voltage (Inside/outside)  {'  '} 89
+                                Live Voltage (Inside/outside)  {'  '}<span>89</span>
                             </Typography>
 
                             <Typography className='box_style'>
-                                Live Power Factor (Inside/outside)  {'  '} 89
+                                Live Power Factor (Inside/outside)  {'  '}<span>89</span>
                             </Typography>
 
                             <Typography className='box_style'>
-                                Live Frequency (Inside/outside)  {'  '} 89
+                                Live Frequency (Inside/outside)  {'  '} <span>89</span>
                             </Typography>
 
                         </AccordionDetails>
@@ -126,32 +127,32 @@ export default function ControlledAccordions() {
                                 Monitors
                             </Typography>
                         </AccordionSummary>
-                        <AccordionDetails style={{ backgroundColor: 'midnightblue', color: 'white' }}>
+                        <AccordionDetails style={{ backgroundColor: 'white', color: 'white' }}>
                             <Typography className='box_style'>
-                                Air Neutralizer Level (Inside/outside)  {'  '} 89
+                                Air Neutralizer Level (Inside/outside)  {'  '} <span>89</span>
                             </Typography>
 
                             <Typography className='box_style'>
-                                Hand-wash Level (Inside/outside)  {'  '} 89
+                                Hand-wash Level (Inside/outside)  {'  '} <span>89</span>
                             </Typography>
 
                             <Typography className='box_style'>
-                                Garbage Monitor (Inside/outside)  {'  '} 89
+                                Garbage Monitor (Inside/outside)  {'  '} <span>89</span>
                             </Typography>
 
                             <Typography className='box_style'>
-                                DG Set Service Due  (Inside/outside)  {'  '} 89
+                                DG Set Service Due  (Inside/outside)  {'  '} <span>89</span>
                             </Typography>
 
                             <Typography className='box_style'>
-                                AC Service Due (Inside/outside)  {'  '} 89
+                                AC Service Due (Inside/outside)  {'  '}<span>89</span>
                             </Typography>
 
                         </AccordionDetails>
                     </Accordion>
 
                 </>
-            }
+           }
         </div>
     );
 }

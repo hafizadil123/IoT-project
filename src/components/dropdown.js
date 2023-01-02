@@ -3,12 +3,15 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-
+import { AppContext } from '../context';
 export default function SelectVariants() {
   const [filter, setFilter] = React.useState('');
+  const { dispatchUserEvent } = React.useContext(AppContext)
 
   const handleChange = (event) => {
     setFilter(event.target.value);
+    console.log('locations', event.target.value)
+    dispatchUserEvent('Filter', event.target.value)
   };
 
   return (

@@ -20,6 +20,8 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
 import Select from './dropdown'
+import { AppContext } from '../context';
+
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   marginleft: '24px',
@@ -78,6 +80,7 @@ export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState(null);
+    const { dispatchUserEvent, data, branchInfo, filter } = React.useContext(AppContext);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -197,7 +200,7 @@ export default function PrimarySearchAppBar() {
         
         </Toolbar>
 
-        <Grid container spacing={2}>
+        <Grid container spacing={2} >
   <Grid item xs={9}>
   <Search>
             <SearchIconWrapper>
@@ -206,7 +209,7 @@ export default function PrimarySearchAppBar() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
-              onChange={(e) => console.log(e.target.value)}
+              onChange={(e) => dispatchUserEvent('Search',e.target.value)}
             />
           </Search>
         
