@@ -167,7 +167,7 @@ export default function PrimarySearchAppBar() {
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
-            Logo
+            <img src="https://w7.pngwing.com/pngs/885/10/png-transparent-logo-internet-of-things-narrowband-iot-universal-windows-platform-brand-iot-angle-text-trademark-thumbnail.png" className='logo' />
           </Typography>
           
           <Box sx={{ flexGrow: 1 }} />
