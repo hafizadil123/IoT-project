@@ -80,7 +80,7 @@ export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState(null);
-    const { dispatchUserEvent, data, branchInfo, filter } = React.useContext(AppContext);
+    // const { dispatchUserEvent, data, branchInfo, filter } = React.useContext(AppContext);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -209,7 +209,7 @@ export default function PrimarySearchAppBar() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
-              onChange={(e) => dispatchUserEvent('Search',e.target.value)}
+              // onChange={(e) => dispatchUserEvent('Search',e.target.value)}
             />
           </Search>
         

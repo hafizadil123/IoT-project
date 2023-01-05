@@ -8,8 +8,8 @@ import { AppContext } from "../context";
 import axios from "axios";
 import constants from "../constants";
 import "./style.css";
-
-export default function SimpleAccordion() {
+import {Link} from 'react-router-dom';
+export default function HomePage() {
   const [expanded, setExpanded] = React.useState("panel1");
   const [apiData, setApiData] = React.useState({});
   const names = ["States & UTs", "Cities", "Branches"];
@@ -22,17 +22,27 @@ export default function SimpleAccordion() {
     axios.get(`${constants.apiURL}/get-stats`).then((res) => {
       setApiData(res.data);
     });
-  }, [filter]);
+  }, []);
 
   const mainData = {
     states: apiData?.statsCount?.stateCount?.count,
     cities: apiData?.statsCount?.cityCount?.count,
     branches: apiData?.statsCount?.branchCount?.count,
   };
-
+  const getRoute = (item) =>{
+    if(item=="states"){
+        return 'all-states';
+    }
+    if(item=="cities"){
+        return 'all-cities';
+    }
+    if(item=="branches"){
+        return 'all-branches';
+    }
+  }
   return (
     <div>
-    
+     
         {Object.keys(mainData).map((item, index) => (
           <Accordion>
             <AccordionSummary
@@ -43,14 +53,13 @@ export default function SimpleAccordion() {
                 borderBottom: "3px solid midnightblue",
                 marginTop: "16px",
               }}
-              // expanded={expanded === `panel1`} onChange={handleChange(`panel1`)}
             >
               <Typography>{names[index]}</Typography>
             </AccordionSummary>
 
             <AccordionDetails>
-              <Typography onClick={() => dispatchUserEvent("LEVEL_1", item)}>
-                {!Array.isArray(mainData[item]) && mainData[item]}
+              <Typography>
+               <Link to={`/pages/${getRoute(item)}`} style={{color:'black',textDecoration:'none',fontWeight:'bold'}}>  {!Array.isArray(mainData[item]) && mainData[item]}</Link>
               </Typography>
             </AccordionDetails>
           </Accordion>

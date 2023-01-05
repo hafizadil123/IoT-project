@@ -1,51 +1,45 @@
-import * as React from 'react';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Header from './components/header';
-import Box from '@mui/material/Box';
-import Accordion from './components/accordian';
-import CustomizedAccordions from './components/customAccordian'
-import BranchInfoAccordian from './components/branchInfoAccordian'
-import { AppContext } from './context';
+import * as React from "react";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import Header from "./components/header";
+import Box from "@mui/material/Box";
+import Accordion from "./components/accordian";
+import Home from "./components/Home";
+import AllCities from "./components/AllCities";
 
+import CustomizedAccordions from "./components/customAccordian";
+import BranchInfoAccordian from "./components/branchInfoAccordian";
+import { AppContext } from "./context";
+import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
+import AllBranches from "./components/AllBranches";
+import AllStates from "./components/AllStates";
+import GetCitiesFromStates from "./components/getCitiesFromStates";
+import GetBranchesFromCity from "./components/getBranchesFromCity";
 export default function App() {
-  const [data, setData] = React.useState({})
-  const [branchInfo, setBranchInfo] = React.useState(false);
-  const [filter, setFilter] = React.useState('');
-  const [search, setSearch] = React.useState('');
-  const dispatchUserEvent = (actionType, payload) => {
-		switch (actionType) {
-			case 'LEVEL_1':
-				setData(payload);
-        setBranchInfo(false)
-				return;
-			case 'LEVEL_2':
-				setData(payload);
-        setBranchInfo(true)
-				return;
-      case 'Filter':
-        setFilter(payload)
-      case 'Search':
-        setSearch(payload)
-			default:
-				return;
-		}
-	};
-
-  console.log('dataaaa', data)
   return (
-
-    <AppContext.Provider value={{ data, dispatchUserEvent, branchInfo, filter, search }}>
     <Container maxWidth="sm">
       <Box sx={{ my: 4 }}>
-        <Header />
-        
-        <Accordion />
-        <CustomizedAccordions />
-        <BranchInfoAccordian />
+      <Header />
+        <Router>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/pages/all-cities" element={<AllCities />} />
+            <Route path="/pages/all-branches" element={<AllBranches />} />
+            <Route path="/pages/all-states" element={<AllStates />} />
+            <Route path="/pages/get-cites-from-states/:stateName" element={<GetCitiesFromStates />} />
+            <Route path="/pages/get-branches-from-city/:cityName" element={<GetBranchesFromCity />} />
+          </Routes>
+        </Router>
       </Box>
     </Container>
-    			</AppContext.Provider>
 
+    //
+    //       <Header />
+
+    //       <Accordion />
+    //       <CustomizedAccordions />
+    //       <BranchInfoAccordian />
+    //
+    //
   );
 }
