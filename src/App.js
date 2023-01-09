@@ -22,7 +22,7 @@ export default function App() {
       <Box sx={{ my: 4 }}>
      
         <Router>
-        <Header />
+        {/* <Header /> */}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/pages/all-cities" element={<AllCities />} />

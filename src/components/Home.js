@@ -9,6 +9,7 @@ import axios from "axios";
 import constants from "../constants";
 import "./style.css";
 import {Link} from 'react-router-dom';
+import PrimarySearchAppBar from "./header";
 export default function HomePage() {
   const [expanded, setExpanded] = React.useState("panel1");
   const [apiData, setApiData] = React.useState({});
@@ -42,7 +43,7 @@ export default function HomePage() {
   }
   return (
     <div>
-     
+     <PrimarySearchAppBar />
         {Object.keys(mainData).map((item, index) => (
           <Accordion key={index}>
             <AccordionSummary

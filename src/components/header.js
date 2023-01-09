@@ -76,9 +76,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+export default function PrimarySearchAppBar({handleSearch}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [search,setSearch]=React.useState('')
   // const { dispatchUserEvent, data, branchInfo, filter } = React.useContext(AppContext);
 
   const isMenuOpen = Boolean(anchorEl);
@@ -206,6 +207,11 @@ export default function PrimarySearchAppBar() {
                 <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase
+              value={search}
+              onChange={e=>{
+                setSearch(e.target.value);
+                handleSearch(e.target.value)
+              }}
                 placeholder="Search…"
                 inputProps={{ "aria-label": "search" }}
                 // onChange={(e) => dispatchUserEvent('Search',e.target.value)}

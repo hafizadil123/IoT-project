@@ -9,6 +9,7 @@ import axios from "axios";
 import constants from "../constants";
 import ExpandMoreIcon from "@mui/icons-material/ArrowForwardIos";
 import { useParams } from "react-router-dom";
+import PrimarySearchAppBar from "./header";
 export default function BranchInfoPage() {
   const [expanded, setExpanded] = React.useState(false);
   const [typeData, setTypeData] = React.useState([]);
@@ -33,6 +34,7 @@ export default function BranchInfoPage() {
   console.log({ typeData, condition });
   return (
     <div>
+      <PrimarySearchAppBar />
       {brnchName && (
         <>
           <Accordion

@@ -9,6 +9,7 @@ import axios from "axios";
 import constants from "../constants";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import {Link} from 'react-router-dom';
+import PrimarySearchAppBar from "./header";
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -52,15 +53,30 @@ const formatUrl = () => {
 export default function AllStates() {
   const [expanded, setExpanded] = React.useState("panel1");
   const [typeData, setTypeData] = React.useState([]);
+  const [actualData,setActualData]=React.useState([]);
 
   React.useEffect(() => {
     axios.get(`${formatUrl()}`).then((res) => {
       setTypeData(res.data.result);
+      setActualData(res.data.result);
     });
   }, []);
-
+const handleSearch = (value)=>{
+  console.log('valueeee',value)
+  if(value==''){
+    setTypeData(actualData);
+  }else{
+    let searchData=actualData.filter(item=>{
+      if (item.indexOf(value) > -1) {
+        return item
+      }
+    })
+    setTypeData(searchData);
+  }
+}
   return (
     <div>
+      <PrimarySearchAppBar handleSearch={handleSearch} />
       <Accordion>
         <AccordionSummary
           expandIcon={<ArrowForwardIosIcon />}

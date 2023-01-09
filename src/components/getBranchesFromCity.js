@@ -12,6 +12,7 @@ import axios from "axios";
 import constants from "../constants";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import {useParams,Link} from 'react-router-dom';
+import PrimarySearchAppBar from "./header";
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
@@ -55,17 +56,34 @@ export default function GetBranchesFromCity() {
   const [expanded, setExpanded] = React.useState("panel1");
   const [typeData, setTypeData] = React.useState([]);
   const [activeCity,setActiveCity]=React.useState('')
+  const [actualData,setActualData]=React.useState([]);
+
   const { cityName } = useParams();
   React.useEffect(() => {
     setActiveCity(cityName)
     axios.get(`${formatUrl(cityName)}`).then((res) => {
         console.log({res})
       setTypeData(res.data.branches);
+      setActualData(res.data.branches);
+
     });
   }, []);
-
+  const handleSearch = (value)=>{
+    console.log('valueeee',value)
+    if(value==''){
+      setTypeData(actualData);
+    }else{
+      let searchData=actualData.filter(item=>{
+        if (item.indexOf(value) > -1) {
+          return item
+        }
+      })
+      setTypeData(searchData);
+    }
+  }
   return (
     <div>
+      <PrimarySearchAppBar handleSearch={handleSearch} />
       <Accordion>
         <AccordionSummary
           expandIcon={<ArrowForwardIosIcon />}
@@ -78,7 +96,7 @@ export default function GetBranchesFromCity() {
         {typeData.map((item, index) => (
           <AccordionDetails key={index} style={{ backgroundColor: "white" }}>
             {/* <Typography className="box_style">{item}</Typography> */}
-            <Link to={`/pages/get-branches-from-city/${item}`} style={{textDecoration:'none',color:"white"}}><Typography className="box_style">{item}</Typography></Link>
+            <Link to={`/pages/branch-details/${item}`} style={{textDecoration:'none',color:"white"}}><Typography className="box_style">{item}</Typography></Link>
 
           </AccordionDetails>
         ))}
