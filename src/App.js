@@ -15,12 +15,14 @@ import AllBranches from "./components/AllBranches";
 import AllStates from "./components/AllStates";
 import GetCitiesFromStates from "./components/getCitiesFromStates";
 import GetBranchesFromCity from "./components/getBranchesFromCity";
+import BranchInfoPage from "./components/branchInfoAccordian";
 export default function App() {
   return (
     <Container maxWidth="sm">
       <Box sx={{ my: 4 }}>
-      <Header />
+     
         <Router>
+        <Header />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/pages/all-cities" element={<AllCities />} />
@@ -28,6 +30,8 @@ export default function App() {
             <Route path="/pages/all-states" element={<AllStates />} />
             <Route path="/pages/get-cites-from-states/:stateName" element={<GetCitiesFromStates />} />
             <Route path="/pages/get-branches-from-city/:cityName" element={<GetBranchesFromCity />} />
+            <Route path="/pages/get-branches-from-city/:cityName" element={<GetBranchesFromCity />} />
+            <Route path="/pages/branch-details/:brnchName" element={<BranchInfoPage />} />
           </Routes>
         </Router>
       </Box>

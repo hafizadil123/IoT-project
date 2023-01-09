@@ -11,6 +11,7 @@ import { AppContext } from "../context";
 import axios from "axios";
 import constants from "../constants";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import {Link } from 'react-router-dom'
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
@@ -53,7 +54,7 @@ const formatUrl = () => {
 export default function AllBranches() {
   const [expanded, setExpanded] = React.useState("panel1");
   const [typeData, setTypeData] = React.useState([]);
-
+  const [searchData,setSearchData]=React.useState([]);
   React.useEffect(() => {
     axios.get(`${formatUrl()}`).then((res) => {
       setTypeData(res.data.result);
@@ -73,7 +74,8 @@ export default function AllBranches() {
         </AccordionSummary>
         {typeData.map((item, index) => (
           <AccordionDetails key={index} style={{ backgroundColor: "white" }}>
-            <Typography className="box_style">{item}</Typography>
+            <Link to={`/pages/branch-details/${item}`} style={{textDecoration:'none',color:"white"}}><Typography className="box_style">{item}</Typography></Link>
+
           </AccordionDetails>
         ))}
       </Accordion>

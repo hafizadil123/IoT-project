@@ -44,8 +44,9 @@ export default function HomePage() {
     <div>
      
         {Object.keys(mainData).map((item, index) => (
-          <Accordion>
+          <Accordion key={index}>
             <AccordionSummary
+          
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1a-content"
               id="panel1a-header"

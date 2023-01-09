@@ -4,13 +4,21 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { AppContext } from '../context';
+import {useNavigate} from 'react-router-dom'
 export default function SelectVariants() {
   const [filter, setFilter] = React.useState('');
-
+  const navigate=useNavigate();
 
   const handleChange = (event) => {
     setFilter(event.target.value);
+    if(event.target.value==='locations'){
+      navigate('/pages/all-branches')
+
+    }else if(event.target.value==='home'){
+      navigate('/')
+    }
     console.log('locations', event.target.value)
+   
 
   };
 
@@ -25,8 +33,8 @@ export default function SelectVariants() {
           onChange={handleChange}
           label=""
         >
-          <MenuItem value={"home"}>Home</MenuItem>
-          <MenuItem value={"locations"}>Locations</MenuItem>
+          <MenuItem key={1} value={"home"}>Home</MenuItem>
+          <MenuItem key={2} value={"locations"}>Locations</MenuItem>
         </Select>
       </FormControl>
     </div>
