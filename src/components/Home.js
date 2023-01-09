@@ -13,7 +13,10 @@ import PrimarySearchAppBar from "./header";
 export default function HomePage() {
   const [expanded, setExpanded] = React.useState("panel1");
   const [apiData, setApiData] = React.useState({});
+  const [actualData,setActualData]=React.useState([]);
+  const [typeData, setTypeData] = React.useState([]);
   const names = ["States & UTs", "Cities", "Branches"];
+
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
@@ -22,6 +25,7 @@ export default function HomePage() {
   React.useEffect(() => {
     axios.get(`${constants.apiURL}/get-stats`).then((res) => {
       setApiData(res.data);
+      setActualData(res.data?.statsCount?.branchCount?.location)
     });
   }, []);
 
@@ -41,9 +45,22 @@ export default function HomePage() {
         return 'all-branches';
     }
   }
+  const handleSearch = (value)=>{
+    console.log('valueeee',value)
+    if(value==''){
+      setTypeData([]);
+    }else{
+      let searchData=actualData.filter(item=>{
+        if (item.indexOf(value) > -1) {
+          return item
+        }
+      })
+      setTypeData(searchData);
+    }
+  }
   return (
     <div>
-     <PrimarySearchAppBar />
+     <PrimarySearchAppBar handleSearch={handleSearch} />
         {Object.keys(mainData).map((item, index) => (
           <Accordion key={index}>
             <AccordionSummary
@@ -65,7 +82,23 @@ export default function HomePage() {
               </Typography>
             </AccordionDetails>
           </Accordion>
+        
         ))}
+        {
+          typeData.length > 0?
+          <>
+          <Typography>{`Searched Branches`}</Typography>
+          {typeData.map((item, index) => (
+            <AccordionDetails key={index} style={{ backgroundColor: "white" }}>
+              {/* <Typography className="box_style">{item}</Typography> */}
+              <Link to={`/pages/branch-details/${item}`} style={{textDecoration:'none',color:"white"}}><Typography className="box_style">{item}</Typography></Link>
+  
+            </AccordionDetails>
+          ))}
+          
+          </>
+          :null
+        }
     </div>
   );
 }
