@@ -13,6 +13,11 @@ import PrimarySearchAppBar from "./header";
 export default function BranchInfoPage() {
   const [expanded, setExpanded] = React.useState(false);
   const [typeData, setTypeData] = React.useState([]);
+  const [temprature,setTemprature]=React.useState('');
+  const [humidity,setHumidity]=React.useState('');
+  const [electrity,setElectricity]=React.useState(null)
+  const [lux,setLux]=React.useState('');
+  const [aq,setAq]=React.useState('');
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
@@ -27,6 +32,11 @@ export default function BranchInfoPage() {
   React.useEffect(() => {
     axios.get(`${formatUrl(brnchName)}`).then((res) => {
       setTypeData(res.data.result);
+      setHumidity(res.data.humidity)
+      setTemprature(res.data.temprature)
+      setElectricity(res.data.electricity);
+      setLux(res.data.lux);
+      setAq(res.data.AQ);
     });
   }, [branchInfo]);
   console.log("branchInfo", branchInfo, typeData);
@@ -53,27 +63,31 @@ export default function BranchInfoPage() {
             <AccordionDetails style={{ backgroundColor: "white" }}>
               <div className="box_style_main">
                 <Typography>Temperature (Inside/outside)</Typography>
-                <Typography>20 / {current?.feelslike_c}</Typography>
+                <Typography> {temprature} &#8451; / {current?.feelslike_c} &#8451; </Typography>
               </div>
               <div className="box_style_main">
                 <Typography className="box_style_inner">
                   Humidity (Inside/outside)
                 </Typography>
-                <Typography>20 / {current?.humidity}</Typography>
+                <Typography>{humidity} %  / {current?.humidity} %</Typography>
               </div>
               <div className="box_style_main">
                 <Typography className="box_style_inner">
                   Lux (Inside/outside)
                 </Typography>
-                <Typography>20 / {current?.condition?.text}</Typography>
+                <Typography>{lux} / {current?.condition?.text}</Typography>
               </div>
               <div className="box_style_main">
                 <Typography>Air Quality (Inside/outside)</Typography>
-                <Typography>20 / {current?.air_quality?.pm2_5}</Typography>
+                <Typography>{aq} / {current?.air_quality?.pm2_5}</Typography>
               </div>
             </AccordionDetails>
           </Accordion>
-          <Accordion
+          {
+            electrity !==null ?
+            <>
+            {console.log({electrity})}
+            <Accordion
             expanded={expanded === "panel2"}
             onChange={handleChange("panel2")}
           >
@@ -90,28 +104,31 @@ export default function BranchInfoPage() {
               style={{ backgroundColor: "white", color: "white" }}
             >
               <Typography className="box_style">
-                Live Energy (Inside/outside) {"  "} <span>89</span>
+                Live Energy  {"  "} <span>{electrity?.energy} W</span>
               </Typography>
 
               <Typography className="box_style">
-                Live Current (Inside/outside) {"  "} <span>89</span>
+                Live Current  {"  "} <span>{electrity?.current} A</span>
               </Typography>
 
               <Typography className="box_style">
-                Live Voltage (Inside/outside) {"  "}
-                <span>89</span>
+                Live Voltage  {"  "}
+                <span>{electrity?.voltage} V</span>
               </Typography>
 
               <Typography className="box_style">
-                Live Power Factor (Inside/outside) {"  "}
-                <span>89</span>
+                Live Power Factor  {"  "}
+                <span>{electrity?.power_factor}</span>
               </Typography>
 
               <Typography className="box_style">
-                Live Frequency (Inside/outside) {"  "} <span>89</span>
+                Live Frequency  {"  "} <span>{electrity?.frequency}</span>
               </Typography>
             </AccordionDetails>
           </Accordion>
+            </>:null
+          }
+          
           <Accordion
             expanded={expanded === "panel3"}
             onChange={handleChange("panel3")}
