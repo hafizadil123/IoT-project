@@ -135,7 +135,7 @@ export default function BranchInfoPage() {
               style={{ backgroundColor: "white", color: "white" }}
             >
               <Typography className="box_style">
-                Live Energy  {"  "} <span>{electrity?.energy?.toFixed(2)} W</span>
+                Live Energy  {"  "} <span>{electrity?.power?.toFixed(2)} W</span>
               </Typography>
 
               <Typography className="box_style">
