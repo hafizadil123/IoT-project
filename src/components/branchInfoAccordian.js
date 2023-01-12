@@ -26,6 +26,11 @@ export default function BranchInfoPage() {
   const [electrity,setElectricity]=React.useState(null)
   const [lux,setLux]=React.useState('');
   const [aq,setAq]=React.useState('');
+  const [airNuetrelizer,setairNuetrelizer]=React.useState('');
+  const [DGSetServiceDue,setDGSetServiceDue]=React.useState('');
+  const [acServiceDue,setacServiceDue]=React.useState('');
+  const [handWashLevel,sethandWashLevel]=React.useState('');
+  const [garbageMonitor,setgarbageMonitor]=React.useState('');
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
@@ -45,6 +50,11 @@ export default function BranchInfoPage() {
       setElectricity(res.data.electricity);
       setLux(res.data.lux);
       setAq(res.data.AQ);
+      setairNuetrelizer(res.data.airNuetrelizer);
+      setDGSetServiceDue(res.data.DGSetServiceDue);
+      setacServiceDue(res.data.acServiceDue);
+      sethandWashLevel(res.data.handWashLevel);
+      setgarbageMonitor(res.data.garbageMonitor);
     });
   }, [branchInfo]);
   console.log("branchInfo", branchInfo, typeData);
@@ -177,24 +187,24 @@ export default function BranchInfoPage() {
               style={{ backgroundColor: "white", color: "white" }}
             >
               <Typography className="box_style">
-                Air Neutralizer Level (Inside/outside) {"  "} <span>89</span>
+                Air Neutralizer Level {"  "} <span>{airNuetrelizer} %</span>
               </Typography>
 
               <Typography className="box_style">
-                Hand-wash Level (Inside/outside) {"  "} <span>89</span>
+                Hand-wash Level  {"  "} <span>{handWashLevel} %</span>
               </Typography>
 
               <Typography className="box_style">
-                Garbage Monitor (Inside/outside) {"  "} <span>89</span>
+                Garbage Monitor  {"  "} <span>{garbageMonitor} %</span>
               </Typography>
 
               <Typography className="box_style">
-                DG Set Service Due (Inside/outside) {"  "} <span>89</span>
+                DG Set Service Due  {"  "} <span>{DGSetServiceDue} days</span>
               </Typography>
 
               <Typography className="box_style">
-                AC Service Due (Inside/outside) {"  "}
-                <span>89</span>
+                AC Service Due {"  "}
+                <span>{acServiceDue}days</span>
               </Typography>
             </AccordionDetails>
           </Accordion>
