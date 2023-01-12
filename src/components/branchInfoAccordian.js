@@ -135,25 +135,25 @@ export default function BranchInfoPage() {
               style={{ backgroundColor: "white", color: "white" }}
             >
               <Typography className="box_style">
-                Live Energy  {"  "} <span>{electrity?.energy} W</span>
+                Live Energy  {"  "} <span>{electrity?.energy?.toFixed(2)} W</span>
               </Typography>
 
               <Typography className="box_style">
-                Live Current  {"  "} <span>{electrity?.current} A</span>
+                Live Current  {"  "} <span>{electrity?.current?.toFixed(2)} A</span>
               </Typography>
 
               <Typography className="box_style">
                 Live Voltage  {"  "}
-                <span>{electrity?.voltage} V</span>
+                <span>{electrity?.voltage?.toFixed(2)} V</span>
               </Typography>
 
               <Typography className="box_style">
                 Live Power Factor  {"  "}
-                <span>{electrity?.power_factor}</span>
+                <span>{electrity?.power_factor?.toFixed(2)}</span>
               </Typography>
 
               <Typography className="box_style">
-                Live Frequency  {"  "} <span>{electrity?.frequency}</span>
+                Live Frequency  {"  "} <span>{electrity?.frequency?.toFixed(2)}</span>
               </Typography>
             </AccordionDetails>
           </Accordion>
