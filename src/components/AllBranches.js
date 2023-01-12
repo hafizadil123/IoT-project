@@ -53,8 +53,9 @@ const formatUrl = () => {
   return `${constants.apiURL}/get-branches`;
 };
 export default function AllBranches() {
-  const [expanded, setExpanded] = React.useState("panel1");
+  const [expanded, setExpanded] = React.useState("panel1d-header");
   const [typeData, setTypeData] = React.useState([]);
+  const [search, setSearch] = React.useState(false)
   const [actualData,setActualData]=React.useState([]);
 
   React.useEffect(() => {
@@ -65,8 +66,10 @@ export default function AllBranches() {
   }, []);
   const handleSearch = (value)=>{
     console.log('valueeee',value)
+    setSearch(true)
     if(value==''){
       setTypeData(actualData);
+      setSearch(false)
     }else{
       let searchData=actualData.filter(item=>{
         if (item.indexOf(value) > -1) {
@@ -76,10 +79,13 @@ export default function AllBranches() {
       setTypeData(searchData);
     }
   }
+  
   return (
     <div>
       <PrimarySearchAppBar handleSearch={handleSearch} />
-      <Accordion>
+      <Accordion
+        expanded={true}
+      >
         <AccordionSummary
           expandIcon={<ArrowForwardIosIcon />}
           aria-controls="panel1d-content"
@@ -95,6 +101,7 @@ export default function AllBranches() {
           </AccordionDetails>
         ))}
       </Accordion>
+
     </div>
   );
 }
