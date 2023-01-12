@@ -204,7 +204,7 @@ export default function BranchInfoPage() {
 
               <Typography className="box_style">
                 AC Service Due {"  "}
-                <span>{acServiceDue}days</span>
+                <span>{acServiceDue} days</span>
               </Typography>
             </AccordionDetails>
           </Accordion>
