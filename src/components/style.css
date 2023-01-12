@@ -5,6 +5,22 @@
     font-size: 40px;
 }
 
+.css-yw020d-MuiAccordionSummary-expandIconWrapper {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    color: rgba(0, 0, 0, 0.54);
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: -webkit-transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    margin-right: 20px !important;
+    margin-top: 10px !important;
+}
+
 
 .logo {
     width: 50px;
@@ -96,3 +112,15 @@
     width: 90%;
     margin-top: 5px;
 }
+
+@media only screen and (max-width: 600px) {
+  
+    .css-mhc70k-MuiGrid-root {
+     
+        flex-direction: column-reverse !important;
+        /* justify-content: space-around; */
+        align-items: center !important;
+        /* border-bottom: 3px solid midnightblue; */
+    }
+    
+  }

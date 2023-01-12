@@ -1,9 +1,18 @@
 import * as React from "react";
 import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
+import { styled } from "@mui/material/styles";
+
+import MuiAccordionDetails from "@mui/material/AccordionDetails";
+
 import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ArrowForwardIos";
+
+import AccordionDetails from "@mui/material/AccordionDetails";
+// import ExpandMoreIcon from "@mui/icons-material/ArrowForwardIos";
+// import ExpandMoreIcon from "@mui/icons-material/ArrowForwardIos";
+import ExpandMoreIcon from "@mui/icons-material/ArrowForwardIosSharp";
+import MuiAccordionSummary from "@mui/material/AccordionSummary";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+
 import { AppContext } from "../context";
 import axios from "axios";
 import constants from "../constants";
@@ -12,6 +21,7 @@ import {Link} from 'react-router-dom';
 import PrimarySearchAppBar from "./header";
 export default function HomePage() {
   const [expanded, setExpanded] = React.useState("panel1");
+  const [search, setSearch] = React.useState(false)
   const [apiData, setApiData] = React.useState({});
   const [actualData,setActualData]=React.useState([]);
   const [typeData, setTypeData] = React.useState([]);
@@ -46,9 +56,11 @@ export default function HomePage() {
     }
   }
   const handleSearch = (value)=>{
+    setSearch(true)
     console.log('valueeee',value)
     if(value==''){
       setTypeData([]);
+      setSearch(false)
     }else{
       let searchData=actualData.filter(item=>{
         if (item.indexOf(value) > -1) {
@@ -58,19 +70,44 @@ export default function HomePage() {
       setTypeData(searchData);
     }
   }
+  const AccordionSummary = styled((props) => (
+    <MuiAccordionSummary
+      expandIcon={<ArrowForwardIosIcon sx={{ fontSize: "0.9rem" }} />}
+      {...props}
+    />
+  ))(({ theme }) => ({
+    backgroundColor:
+      theme.palette.mode === "dark"
+        ? "rgba(255, 255, 255, .05)"
+        : "rgba(0, 0, 0, .03)",
+    flexDirection: "row-reverse",
+    "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
+      transform: "rotate(90deg)",
+    },
+    "& .MuiAccordionSummary-content": {
+      marginLeft: theme.spacing(1),
+    },
+  }));
+  const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
+    padding: theme.spacing(2),
+    borderTop: "1px solid rgba(0, 0, 0, .125)",
+  }));
+
   return (
     <div>
+     
      <PrimarySearchAppBar handleSearch={handleSearch} />
         {Object.keys(mainData).map((item, index) => (
           <Accordion key={index}>
             <AccordionSummary
           
-              expandIcon={<ExpandMoreIcon />}
+              expandIcon={<ArrowForwardIosIcon />}
               aria-controls="panel1a-content"
               id="panel1a-header"
               style={{
                 borderBottom: "3px solid midnightblue",
                 marginTop: "16px",
+  
               }}
             >
               <Typography>{names[index]}</Typography>
@@ -97,8 +134,9 @@ export default function HomePage() {
           ))}
           
           </>
-          :null
+          : null
         }
+        {search && typeData.length === 0 && <h3>'No Record Found'</h3>}
     </div>
   );
 }

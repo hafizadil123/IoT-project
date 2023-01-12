@@ -1,5 +1,8 @@
 import * as React from "react";
 import Accordion from "@mui/material/Accordion";
+import { styled } from "@mui/material/styles";
+import MuiAccordionDetails from "@mui/material/AccordionDetails";
+
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
@@ -7,11 +10,16 @@ import Typography from "@mui/material/Typography";
 import { AppContext } from "../context";
 import axios from "axios";
 import constants from "../constants";
-import ExpandMoreIcon from "@mui/icons-material/ArrowForwardIos";
 import { useParams } from "react-router-dom";
 import PrimarySearchAppBar from "./header";
+import ExpandMoreIcon from "@mui/icons-material/ArrowForwardIosSharp";
+import MuiAccordionSummary from "@mui/material/AccordionSummary";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+
+
+
 export default function BranchInfoPage() {
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = React.useState('panel1');
   const [typeData, setTypeData] = React.useState([]);
   const [temprature,setTemprature]=React.useState('');
   const [humidity,setHumidity]=React.useState('');
@@ -42,6 +50,29 @@ export default function BranchInfoPage() {
   console.log("branchInfo", branchInfo, typeData);
   const { current, condition } = typeData || {};
   console.log({ typeData, condition });
+  const AccordionSummary = styled((props) => (
+    <MuiAccordionSummary
+      expandIcon={<ArrowForwardIosIcon sx={{ fontSize: "0.9rem" }} />}
+      {...props}
+    />
+  ))(({ theme }) => ({
+    backgroundColor:
+      theme.palette.mode === "dark"
+        ? "rgba(255, 255, 255, .05)"
+        : "rgba(0, 0, 0, .03)",
+    flexDirection: "row-reverse",
+    "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
+      transform: "rotate(90deg)",
+    },
+    "& .MuiAccordionSummary-content": {
+      marginLeft: theme.spacing(1),
+    },
+  }));
+  const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
+    padding: theme.spacing(2),
+    borderTop: "1px solid rgba(0, 0, 0, .125)",
+  }));
+
   return (
     <div>
       <PrimarySearchAppBar />
@@ -52,7 +83,7 @@ export default function BranchInfoPage() {
             onChange={handleChange("panel1")}
           >
             <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
+              expandIcon={<ArrowForwardIosIcon />}
               aria-controls="panel1bh-content"
               id="panel1bh-header"
             >
@@ -63,7 +94,7 @@ export default function BranchInfoPage() {
             <AccordionDetails style={{ backgroundColor: "white" }}>
               <div className="box_style_main">
                 <Typography>Temperature (Inside/outside)</Typography>
-                <Typography> {temprature} &#8451; / {current?.feelslike_c} &#8451; </Typography>
+                <Typography> {temprature && temprature?.toFixed(1)} &#8451; / {current?.feelslike_c} &#8451; </Typography>
               </div>
               <div className="box_style_main">
                 <Typography className="box_style_inner">
@@ -79,7 +110,7 @@ export default function BranchInfoPage() {
               </div>
               <div className="box_style_main">
                 <Typography>Air Quality (Inside/outside)</Typography>
-                <Typography>{aq} / {current?.air_quality?.pm2_5}</Typography>
+                <Typography>{aq} / {current?.air_quality?.pm2_5?.toFixed(2)}</Typography>
               </div>
             </AccordionDetails>
           </Accordion>
@@ -92,7 +123,7 @@ export default function BranchInfoPage() {
             onChange={handleChange("panel2")}
           >
             <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
+              expandIcon={<ArrowForwardIosIcon />}
               aria-controls="panel1bh-content"
               id="panel1bh-header"
             >
@@ -134,7 +165,7 @@ export default function BranchInfoPage() {
             onChange={handleChange("panel3")}
           >
             <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
+              expandIcon={<ArrowForwardIosIcon />}
               aria-controls="panel1bh-content"
               id="panel1bh-header"
             >

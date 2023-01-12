@@ -6,22 +6,24 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { AppContext } from '../context';
 import {useNavigate} from 'react-router-dom'
 export default function SelectVariants() {
-  const [filter, setFilter] = React.useState('');
+  const [filter, setFilter] = React.useState('home');
   const navigate=useNavigate();
 
   const handleChange = (event) => {
     setFilter(event.target.value);
     if(event.target.value==='locations'){
+      localStorage.setItem('filter', event.target.value)
       navigate('/pages/all-branches')
 
     }else if(event.target.value==='home'){
+      localStorage.setItem('filter', event.target.value)
       navigate('/')
     }
     console.log('locations', event.target.value)
    
 
   };
-
+ const filterV = localStorage.getItem('filter')
   return (
     <div>
       <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
@@ -29,7 +31,7 @@ export default function SelectVariants() {
         <Select
           labelId="demo-simple-select-standard-label"
           id="demo-simple-select-standard"
-          value={filter}
+          value={filterV || filter}
           onChange={handleChange}
           label=""
         >

@@ -89,7 +89,7 @@ export default function GetCitiesFromStates() {
           id="panel1d-header"
           style={{ fontSize: "16px" }}
         >
-          <Typography>{`${activeState} State Cities`}</Typography>
+          <Typography>{`Cities in ${activeState}`}</Typography>
         </AccordionSummary>
         {typeData.map((item, index) => (
           <AccordionDetails key={index} style={{ backgroundColor: "white" }}>

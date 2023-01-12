@@ -3,7 +3,12 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ArrowForwardIos";
+// import ExpandMoreIcon from "@mui/icons-material/ArrowForwardIos";
+// import ExpandMoreIcon from "@mui/icons-material/ArrowForwardIos";
+import ExpandMoreIcon from "@mui/icons-material/ArrowForwardIosSharp";
+import MuiAccordionSummary from "@mui/material/AccordionSummary";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+
 import { AppContext } from "../context";
 import axios from "axios";
 import constants from "../constants";
@@ -30,13 +35,35 @@ export default function SimpleAccordion() {
     branches: apiData?.statsCount?.branchCount?.count,
   };
 
+  const AccordionSummary = styled((props) => (
+    <MuiAccordionSummary
+      expandIcon={<ExpandMoreIcon sx={{ fontSize: "0.9rem" }} />}
+      {...props}
+    />
+  ))(({ theme }) => ({
+    backgroundColor:
+      theme.palette.mode === "dark"
+        ? "rgba(255, 255, 255, .05)"
+        : "rgba(0, 0, 0, .03)",
+    flexDirection: "row-reverse",
+    "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
+      transform: "rotate(90deg)",
+    },
+    "& .MuiAccordionSummary-content": {
+      marginLeft: theme.spacing(1),
+    },
+  }));
+  const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
+    padding: theme.spacing(2),
+    borderTop: "1px solid rgba(0, 0, 0, .125)",
+  }));
   return (
     <div>
     
         {Object.keys(mainData).map((item, index) => (
           <Accordion>
             <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
+              expandIcon={<ArrowForwardIosIcon />}
               aria-controls="panel1a-content"
               id="panel1a-header"
               style={{

@@ -21,6 +21,7 @@ import Paper from "@mui/material/Paper";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import Select from "./dropdown";
 import { AppContext } from "../context";
+import {Link} from 'react-router-dom';
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -166,10 +167,15 @@ export default function PrimarySearchAppBar({handleSearch}) {
             component="div"
             sx={{ display: { xs: "none", sm: "block" } }}
           >
-            <img
+            <div>
+              <Link to="/" >
+              <img
               src="https://w7.pngwing.com/pngs/885/10/png-transparent-logo-internet-of-things-narrowband-iot-universal-windows-platform-brand-iot-angle-text-trademark-thumbnail.png"
               className="logo"
             />
+              </Link>
+            </div>
+           
           </Typography>
 
           <Box sx={{ flexGrow: 1 }} />
