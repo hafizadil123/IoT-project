@@ -72,7 +72,7 @@ export default function AllBranches() {
       setSearch(false)
     }else{
       let searchData=actualData.filter(item=>{
-        if (item.indexOf(value) > -1) {
+        if (item.toLowerCase().indexOf(value.toLowerCase()) > -1) {
           return item
         }
       })

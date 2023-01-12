@@ -67,7 +67,7 @@ const handleSearch = (value)=>{
     setTypeData(actualData);
   }else{
     let searchData=actualData.filter(item=>{
-      if (item.indexOf(value) > -1) {
+      if (item.toLowerCase().indexOf(value.toLowerCase()) > -1) {
         return item
       }
     })
