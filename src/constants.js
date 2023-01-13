@@ -1,4 +1,4 @@
-const apiURL = "https://api.tigonfuturistics.com/api"
+const apiURL = "http://api.tigonfuturistics.com/api"
 
 export default {
     apiURL
