@@ -97,6 +97,22 @@ export default function HomePage() {
     <div>
      
      <PrimarySearchAppBar handleSearch={handleSearch} />
+     {
+          typeData.length > 0?
+          <>
+          <Typography>{`Searched Branches`}</Typography>
+          {typeData.map((item, index) => (
+            <AccordionDetails key={index} style={{ backgroundColor: "white" }}>
+              {/* <Typography className="box_style">{item}</Typography> */}
+              <Link to={`/pages/branch-details/${item}`} style={{textDecoration:'none',color:"white"}}><Typography className="box_style">{item}</Typography></Link>
+  
+            </AccordionDetails>
+          ))}
+          
+          </>
+          : null
+        }
+        {search && typeData.length === 0 && <h3>'No Record Found'</h3>}
         {Object.keys(mainData).map((item, index) => (
           <Accordion key={index}>
             <AccordionSummary
@@ -121,22 +137,7 @@ export default function HomePage() {
           </Accordion>
         
         ))}
-        {
-          typeData.length > 0?
-          <>
-          <Typography>{`Searched Branches`}</Typography>
-          {typeData.map((item, index) => (
-            <AccordionDetails key={index} style={{ backgroundColor: "white" }}>
-              {/* <Typography className="box_style">{item}</Typography> */}
-              <Link to={`/pages/branch-details/${item}`} style={{textDecoration:'none',color:"white"}}><Typography className="box_style">{item}</Typography></Link>
-  
-            </AccordionDetails>
-          ))}
-          
-          </>
-          : null
-        }
-        {search && typeData.length === 0 && <h3>'No Record Found'</h3>}
+       
     </div>
   );
 }

@@ -86,6 +86,10 @@ export default function BranchInfoPage() {
   return (
     <div>
       <PrimarySearchAppBar />
+      <div style={{display: 'flex', justifyContent: 'center', alignItem: 'center', background:'white'}}>
+        <h3>{brnchName}</h3>
+      </div>
+     
       {brnchName && (
         <>
           <Accordion

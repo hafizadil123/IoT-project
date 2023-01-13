@@ -167,12 +167,9 @@ export default function PrimarySearchAppBar({handleSearch}) {
             component="div"
             sx={{ display: { xs: "none", sm: "block" } }}
           >
-            <div>
-              <Link to="/" >
-              <img
-              src="https://w7.pngwing.com/pngs/885/10/png-transparent-logo-internet-of-things-narrowband-iot-universal-windows-platform-brand-iot-angle-text-trademark-thumbnail.png"
-              className="logo"
-            />
+            <div style={{marginTop: '20px'}}>
+              <Link to="/" style={{textDecoration: 'none'}}>
+                <span>Calvinia</span>
               </Link>
             </div>
            
@@ -218,7 +215,7 @@ export default function PrimarySearchAppBar({handleSearch}) {
                 setSearch(e.target.value);
                 handleSearch(e.target.value)
               }}
-                placeholder="Search…"
+                placeholder="Search for any branch..."
                 inputProps={{ "aria-label": "search" }}
                 // onChange={(e) => dispatchUserEvent('Search',e.target.value)}
               />
