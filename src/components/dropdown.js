@@ -5,7 +5,20 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { AppContext } from "../context";
 import { useNavigate } from "react-router-dom";
+import { styled, alpha } from "@mui/material/styles";
+
+const DropDown = styled(Select)(({ theme }) => ({
+  [theme.breakpoints.up("xs")]: {
+    marginLeft: theme.spacing(2),
+    width: "auto",
+    marginRight: '50px'
+  },
+  
+}));
+
 export default function SelectVariants() {
+
+  
   const [filter, setFilter] = React.useState("home");
   const navigate = useNavigate();
   React.useEffect(() => {
@@ -44,7 +57,7 @@ export default function SelectVariants() {
     <div>
       <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
         <InputLabel id="demo-simple-select-standard-label"></InputLabel>
-        <Select
+        <DropDown
           labelId="demo-simple-select-standard-label"
           id="demo-simple-select-standard"
           value={filter}
@@ -58,7 +71,7 @@ export default function SelectVariants() {
           <MenuItem key={2} value={"locations"}>
             Locations
           </MenuItem>
-        </Select>
+        </DropDown>
       </FormControl>
     </div>
   );

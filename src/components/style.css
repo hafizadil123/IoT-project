@@ -44,7 +44,7 @@
 .box_style_main {
     padding: 10px;
     border: 1px solid;
-    padding: inherit;
+    padding: inherit !important;
     font-size: 20px;
     display: flex;
     font-weight: bold;
@@ -115,12 +115,13 @@
 
 @media only screen and (max-width: 600px) {
   
-    .css-mhc70k-MuiGrid-root {
-     
-        flex-direction: column-reverse !important;
-        /* justify-content: space-around; */
-        align-items: center !important;
-        /* border-bottom: 3px solid midnightblue; */
+    .responsive {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        /* padding: 0; */
+        margin-bottom: 27px;
     }
     
   }

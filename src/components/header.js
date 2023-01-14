@@ -22,7 +22,7 @@ import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import Select from "./dropdown";
 import { AppContext } from "../context";
 import {Link} from 'react-router-dom';
-
+import './style.css'
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   marginleft: "24px",
@@ -38,19 +38,14 @@ const Search = styled("div")(({ theme }) => ({
   marginRight: theme.spacing(2),
   marginLeft: 0,
   width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(3),
+  [theme.breakpoints.up("xs")]: {
+    marginLeft: theme.spacing(4),
     width: "auto",
   },
+  
 }));
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
+
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
@@ -74,6 +69,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     [theme.breakpoints.up("md")]: {
       width: "20ch",
     },
+    
   },
 }));
 
@@ -129,6 +125,7 @@ export default function PrimarySearchAppBar({handleSearch}) {
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
+      className="responsive"
       anchorOrigin={{
         vertical: "top",
         horizontal: "right",
@@ -204,7 +201,7 @@ export default function PrimarySearchAppBar({handleSearch}) {
         </Toolbar>
 
         <Grid container spacing={2}>
-          <Grid item xs={9}>
+          <Grid item xs={8} md={9}>
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />
@@ -221,7 +218,7 @@ export default function PrimarySearchAppBar({handleSearch}) {
               />
             </Search>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={4} md={3}>
             <Select />
           </Grid>
         </Grid>
